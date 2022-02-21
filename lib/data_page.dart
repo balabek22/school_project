@@ -35,7 +35,6 @@ class _DataPageState extends State<DataPage> {
         this.feedbackItems.removeWhere((element) => element.form != '${widget.formNumber}${widget.formLatter}');
       });
     });
-    //TODO изменения цвета
     Timer.periodic(Duration(microseconds: 200), (timer) {
       setState(() {
         if (feedbackItems[0].changes==""){
