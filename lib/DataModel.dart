@@ -1,11 +1,12 @@
 import 'dart:convert';
-/// form : "1а"
+/// form : "11"
 /// monday : "-Математика\n-Русский\n-Английский"
 /// tuesday : "-Математика\n-Русский\n-Английский"
 /// wednesday : "-Математика\n-Русский\n-Английский"
 /// thursday : "-Математика\n-Русский\n-Английский"
 /// friday : "-Математика\n-Русский\n-Английский"
 /// saturday : "-Математика\n-Русский\n-Английский"
+/// changes : ""
 
 DataModel dataModelFromJson(String str) => DataModel.fromJson(json.decode(str));
 String dataModelToJson(DataModel data) => json.encode(data.toJson());
@@ -17,7 +18,8 @@ class DataModel {
       String? wednesday, 
       String? thursday, 
       String? friday, 
-      String? saturday,}){
+      String? saturday, 
+      String? changes,}){
     _form = form;
     _monday = monday;
     _tuesday = tuesday;
@@ -25,6 +27,7 @@ class DataModel {
     _thursday = thursday;
     _friday = friday;
     _saturday = saturday;
+    _changes = changes;
 }
 
   DataModel.fromJson(dynamic json) {
@@ -35,6 +38,7 @@ class DataModel {
     _thursday = json['thursday'];
     _friday = json['friday'];
     _saturday = json['saturday'];
+    _changes = json['changes'];
   }
   String? _form;
   String? _monday;
@@ -43,6 +47,7 @@ class DataModel {
   String? _thursday;
   String? _friday;
   String? _saturday;
+  String? _changes;
 
   String? get form => _form;
   String? get monday => _monday;
@@ -51,6 +56,7 @@ class DataModel {
   String? get thursday => _thursday;
   String? get friday => _friday;
   String? get saturday => _saturday;
+  String? get changes => _changes;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -61,6 +67,7 @@ class DataModel {
     map['thursday'] = _thursday;
     map['friday'] = _friday;
     map['saturday'] = _saturday;
+    map['changes'] = _changes;
     return map;
   }
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:school_project/data_model.dart';
+import 'package:school_project/DataModel.dart';
 import 'package:school_project/data_page.dart';
 
 class DataController {

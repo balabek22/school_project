@@ -37,6 +37,44 @@ class _FormsPageState extends State<FormsPage> {
     );
   }
 
+  Widget formItem(int formNumber){
+    if(formNumber==10 || formNumber==11){
+      return Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(120)),
+        child: ListTile(
+          title: Text("$formNumber класс"),
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (_){
+            return DataPage(
+              formLatter: "",
+              formNumber: formNumber,
+            );
+          }));
+        },
+        ),
+      );
+    } else{
+      return Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(120)),
+        child: ExpansionTile(
+          title: Text('${formNumber} класс'),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  formChip(formNumber, 'а'),
+                  formChip(formNumber, 'б'),
+                  formChip(formNumber, 'в'),
+                ],
+              ),
+            ),
+          ],),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,25 +82,10 @@ class _FormsPageState extends State<FormsPage> {
       appBar: AppBar(
         title: const Text('Выберите класс'),
       ),
-      body: ListView.builder(itemBuilder: (_, form){
-        return Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(120)),
-          child: ExpansionTile(
-            title: Text('${form+1} класс'),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  formChip(form+1, 'а'),
-                  formChip(form+1, 'б'),
-                  formChip(form+1, 'в'),
-                ],
-              ),
-            ),
-          ],),
-        );
+      body: ListView.builder(
+          itemCount: 11,
+          itemBuilder: (_, form){
+            return formItem(form+1);
       }),
     );
   }
