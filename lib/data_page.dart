@@ -1,6 +1,5 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:school_project/data_controller.dart';
 
 import 'DataModel.dart';
@@ -35,43 +34,38 @@ class _DataPageState extends State<DataPage> {
         this.feedbackItems.removeWhere((element) => element.form != '${widget.formNumber}${widget.formLatter}');
       });
     });
-    Timer.periodic(Duration(microseconds: 200), (timer) {
-      setState(() {
-        if (feedbackItems[0].changes==""){
-          appbarcolor=Colors.white;
-        } else{
-          appbarcolor=Colors.red;
-        }
-      });
-    });
     waitforme();
   }
   waitforme() async{
     await Future.delayed(Duration(seconds: 3));
-    isloadining=false;
+    setState(() {
+      isloadining=false;
+    });
   }
 
   Widget timeTableItem(String day, String timetable){
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24,)
-      ),
-      shadowColor: Colors.black87,
-      color: Colors.blue,
-      child: ListTile(
-        subtitle: Text(feedbackItems[0].monday.toString()),
-        title: Text('Понедельник'),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Neumorphic(
+        child: ListTile(
+          subtitle: Text(feedbackItems[0].monday.toString()),
+          title: Text('Понедельник'),
+        ),
       ),
     );
   }
 
   Widget changesItem(){
     if(feedbackItems[0].changes==""){
-      return Container();
+      return Neumorphic();
     } else {
-      return ListTile(
-        subtitle: Text(feedbackItems[0].changes.toString()),
-        title: Text('Замены'),
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          subtitle: Text(feedbackItems[0].changes.toString()),
+          title: Text('Замены'),
+          textColor: Colors.blue,
+        ),
       );
     }
   }
@@ -79,10 +73,15 @@ class _DataPageState extends State<DataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: NeumorphicAppBar(
+        leading: NeumorphicButton(
+          child: Icon(Icons.arrow_back,
+          color: Colors.blue,),
+          onPressed: ()=>Navigator.pop(context),
+        ),
         title: Text('Расписание ${widget.formNumber}${widget.formLatter}'),
       ),
-      body: isloadining==true?Center(child: CircularProgressIndicator()): ListView(
+      body: isloadining==true?Center(child: NeumorphicProgressIndeterminate()): ListView(
         children: [
           changesItem(),
           timeTableItem("Понедельник", feedbackItems[0].monday.toString()),
