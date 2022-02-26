@@ -20,9 +20,12 @@ class _FormsPageState extends State<FormsPage> {
         Colors.white,size: 20,),
       ),*/
       style: NeumorphicRadioStyle(
+        border: NeumorphicBorder(width: 1.0, color: Colors.blue),
+          selectedColor: Colors.blue,
         disableDepth: false, shape: NeumorphicShape.concave,
         unselectedDepth: 2,
-        selectedDepth: 4
+        selectedDepth: 2,
+        intensity: 0.5
       ),
       child: Text(formLatter),
       onChanged: (changed) {
