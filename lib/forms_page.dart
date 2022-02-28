@@ -1,4 +1,5 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:hive/hive.dart';
 import 'package:school_project/data_page.dart';
 
 class FormsPage extends StatefulWidget {
@@ -10,6 +11,9 @@ class FormsPage extends StatefulWidget {
 
 class _FormsPageState extends State<FormsPage> {
 
+  final UserForm=Hive.box("UserForm");
+  
+  
   Widget formChip(int formNumber, String formLatter){
     return NeumorphicRadio(
       //elevation: 8.0,
@@ -29,6 +33,9 @@ class _FormsPageState extends State<FormsPage> {
       ),
       child: Text(formLatter),
       onChanged: (changed) {
+        UserForm.put("UserFormLatter", formLatter);
+        UserForm.put("UserFormNumber", formNumber);
+        print("${UserForm.get("UserFormNumber")} ${UserForm.get("UserFormLatter")}");
         Navigator.push(context, MaterialPageRoute(builder: (_){
           return DataPage(
             formLatter: formLatter,
@@ -93,6 +100,20 @@ class _FormsPageState extends State<FormsPage> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    if (UserForm.isNotEmpty) {
+      Future.delayed(Duration(seconds: 3));
+      Navigator.push(context, MaterialPageRoute(builder: (_){
+        return DataPage(
+          formLatter: UserForm.get("UserFormLatter"),
+          formNumber: UserForm.get("UserFormNumber"),
+        );
+      }));
+    }  
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
