@@ -104,7 +104,7 @@ class _FormsPageState extends State<FormsPage> {
   void initState() {
     super.initState();
     if (UserForm.isNotEmpty) {
-      Future.delayed(Duration(seconds: 3));
+      Future.delayed(Duration(seconds: 30));
       Navigator.push(context, MaterialPageRoute(builder: (_){
         return DataPage(
           formLatter: UserForm.get("UserFormLatter"),

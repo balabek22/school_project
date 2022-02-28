@@ -3,6 +3,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:school_project/data_controller.dart';
 
 import 'DataModel.dart';
+import 'forms_page.dart';
 
 
 class DataPage extends StatefulWidget {
@@ -77,7 +78,7 @@ class _DataPageState extends State<DataPage> {
         leading: NeumorphicButton(
           child: Icon(Icons.arrow_back,
           color: Colors.blue,),
-          onPressed: ()=>Navigator.pop(context),
+          onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => FormsPage()))
         ),
         title: Text('Расписание ${widget.formNumber}${widget.formLatter}'),
       ),
