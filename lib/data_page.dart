@@ -62,10 +62,16 @@ class _DataPageState extends State<DataPage> {
     } else {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          subtitle: Text(feedbackItems[0].changes.toString()),
-          title: Text('Замены'),
-          textColor: Colors.blue,
+        child: Neumorphic(
+          style: NeumorphicStyle(
+            lightSource: LightSource.topLeft,
+            depth: -10
+          ),
+          child: ListTile(
+            subtitle: Text(feedbackItems[0].changes.toString()),
+            title: Text('Замены'),
+            textColor: Colors.blue,
+          ),
         ),
       );
     }
@@ -78,7 +84,7 @@ class _DataPageState extends State<DataPage> {
         leading: NeumorphicButton(
           child: Icon(Icons.arrow_back,
           color: Colors.blue,),
-          onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => FormsPage()))
+          onPressed: ()=>Navigator.pop(context),
         ),
         title: Text('Расписание ${widget.formNumber}${widget.formLatter}'),
       ),

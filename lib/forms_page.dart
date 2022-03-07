@@ -36,12 +36,12 @@ class _FormsPageState extends State<FormsPage> {
         UserForm.put("UserFormLatter", formLatter);
         UserForm.put("UserFormNumber", formNumber);
         print("${UserForm.get("UserFormNumber")} ${UserForm.get("UserFormLatter")}");
-        Navigator.push(context, MaterialPageRoute(builder: (_){
+        showDialog(context: context, builder: (_){
           return DataPage(
             formLatter: formLatter,
             formNumber: formNumber,
           );
-        }));
+        });
       },
       //backgroundColor: Colors.grey[200],
       /*shape: const StadiumBorder(
@@ -62,12 +62,12 @@ class _FormsPageState extends State<FormsPage> {
           child: ListTile(
             title: Text("$formNumber класс"),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (_){
+            showDialog(context: context, builder: (_){
               return DataPage(
                 formLatter: "",
                 formNumber: formNumber,
               );
-            }));
+            });
           },
           ),
         ),
@@ -105,12 +105,12 @@ class _FormsPageState extends State<FormsPage> {
     super.initState();
     if (UserForm.isNotEmpty) {
       Future.delayed(Duration(seconds: 30));
-      Navigator.push(context, MaterialPageRoute(builder: (_){
+      showDialog(context: context, builder: (_){
         return DataPage(
           formLatter: UserForm.get("UserFormLatter"),
           formNumber: UserForm.get("UserFormNumber"),
         );
-      }));
+      });
     }  
   }
   
